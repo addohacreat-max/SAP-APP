@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>متابعة دورات المزارع</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f1ea;--sf:#fff;--tx:#1d2a22;--mu:#66736b;--ln:#dcd8cb;--ac:#2f6b4f;--ac2:#e3efe8;--wa:#b3541e;--wa2:#f8e4d6;--na:#8a8f94;--sb:#1f3a2d;--sbt:#cfe0d6}
+@media (prefers-color-scheme:dark){:root{--bg:#121a15;--sf:#1b2620;--tx:#e8eee9;--mu:#9aa9a0;--ln:#2e3b33;--ac:#6fc29a;--ac2:#223a2e;--wa:#f09a64;--wa2:#3d2a1d;--na:#7c8288;--sb:#0c130f;--sbt:#a9bdb1}}
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 15px/1.6 Tajawal,Tahoma,Arial,sans-serif}
+.app{display:grid;grid-template-columns:210px 1fr;min-height:100vh}
+.sb{background:var(--sb);color:var(--sbt);padding:16px 10px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.sb h2{margin:0 8px 14px;font-size:17px;color:#fff}
+.sb button{background:none;border:0;color:inherit;text-align:right;padding:10px 12px;border-radius:9px;cursor:pointer;font:inherit}
+.sb button.on{background:var(--ac);color:#fff;font-weight:700}
+.sb small{margin-top:auto;padding:8px 12px;opacity:.85}
+.top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--ln)}
+.top h1{margin:0;font-size:19px;flex:1}
+main{padding:16px;max-width:1200px}
+input,select,textarea,button{font:inherit;color:inherit}
+input,select,textarea{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:5px 8px;max-width:100%}
+.btn{background:var(--ac);color:var(--bg);border:0;border-radius:8px;padding:7px 14px;cursor:pointer;font-weight:500}
+.btn.g{background:none;color:var(--ac);border:1px solid var(--ac)}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sum div{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:8px 14px;min-width:120px}
+.sum b{display:block;font-size:22px}.sum .w b{color:var(--wa)}
+.fl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.fl label{color:var(--mu);font-size:13px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:12px}
+.card h3{margin:0 0 6px;font-size:16px;display:flex;justify-content:space-between}.card h3 small{color:var(--mu);font-weight:400}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+.chip{border:1px dashed var(--ln);background:none;border-radius:99px;padding:3px 10px;cursor:pointer;font-size:13px;color:var(--mu)}
+.chip.done{background:var(--ac2);border:1px solid var(--ac);color:var(--ac)}.chip.na{text-decoration:line-through;color:var(--na)}
+.h{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--ln);flex-wrap:wrap}
+.h .n{font-weight:700;width:70px}.h .n small{display:block;font-weight:400;color:var(--mu);font-size:11px}
+.h .a{color:var(--mu);font-size:13px;flex:1;min-width:90px}
+.t{border:1px solid var(--ln);background:none;border-radius:8px;padding:4px 9px;cursor:pointer;font-size:13px}
+.t.done{background:var(--ac);border-color:var(--ac);color:var(--bg)}.t.na{text-decoration:line-through;color:var(--na)}
+.t.o{border-color:var(--wa);color:var(--wa);background:var(--wa2)}
+.tw{overflow-x:auto;border:1px solid var(--ln);border-radius:12px}
+table{width:100%;border-collapse:collapse;background:var(--sf)}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--ln);white-space:nowrap}th{color:var(--mu);font-weight:500}
+tr.k{cursor:pointer}tr.k:hover td{background:var(--ac2)}
+.bar{height:6px;background:var(--ln);border-radius:9px;min-width:80px}.bar i{display:block;height:100%;background:var(--ac);border-radius:9px}
+.st{border-radius:99px;padding:2px 10px;font-size:13px;background:var(--wa2);color:var(--wa)}
+details{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:8px 12px;margin-bottom:8px}
+summary{cursor:pointer;font-weight:700}summary span{color:var(--wa);margin-inline-start:8px}
+.empty{padding:30px;text-align:center;color:var(--mu)}
+.fm{max-width:600px;background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:16px}
+.fm label,dialog label{display:block;margin:10px 0 3px;color:var(--mu);font-size:13px}
+.fm input,.fm select,dialog select,dialog textarea{width:100%}
+.hs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px}
+.hs div{display:flex;gap:6px;align-items:center;border:1px solid var(--ln);border-radius:8px;padding:4px 8px}
+.hs input[type=checkbox]{width:auto}.hs input:not([type=checkbox]){width:120px}
+dialog{border:1px solid var(--ln);border-radius:12px;background:var(--sf);color:var(--tx);width:min(420px,92vw)}
+#tm{margin:8px 0;color:var(--mu);font-size:13px}.dr{display:flex;gap:6px;flex-wrap:wrap}
+#lg{max-width:340px;margin:12vh auto;padding:20px;background:var(--sf);border:1px solid var(--ln);border-radius:12px}
+#lg input{width:100%;margin:6px 0}#lg h1{font-size:19px;margin:0 0 10px}#er{color:var(--wa);font-size:13px}
+@media(max-width:760px){.app{display:block}
+ .sb{position:fixed;inset:auto 0 0 0;height:auto;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:9;justify-content:space-around}
+ .sb h2,.sb small{display:none}.sb button{flex:1;text-align:center;padding:8px 4px;font-size:12px}main{padding-bottom:90px}}
+</style></head><body>
+<div id="lg" style="display:none"><h1>🐔 متابعة دورات المزارع</h1>
+ <input id="em" type="email" placeholder="البريد الإلكتروني" autocomplete="username">
+ <input id="pw" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+ <button class="btn" id="go" style="width:100%">دخول</button><div id="er"></div></div>
+<div class="app" id="app" style="display:none">
+ <nav class="sb"><h2>🐔 دورات المزارع</h2><span id="nv" style="display:contents"></span><small><span id="who"></span><br><a href="#" id="out" style="color:inherit">تسجيل الخروج</a></small></nav>
+ <div><div class="top"><h1 id="ti"></h1><input type="date" id="dt" aria-label="التاريخ"><button class="btn g" id="td">اليوم</button></div><main id="m"></main></div>
+</div>
+<dialog id="tk"><b id="tl"></b>
+ <label>الحالة</label><select id="ts"><option value="done">منجز</option><option value="na">غير منطبق</option></select>
+ <label>ملاحظة</label><textarea id="tn" rows="3"></textarea><div id="tm"></div>
+ <div class="dr"><button class="btn" id="tsv">حفظ</button><button class="btn g" id="tdl">حذف التسجيل</button><button class="btn g" id="tdx">حذف المهمة</button><button class="btn g" id="tcx">إغلاق</button></div></dialog>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const sb=supabase.createClient(CFG.url,CFG.key);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const iso=d=>d.toISOString().slice(0,10),today=iso(new Date());
+const dn=(a,b)=>Math.round((Date.parse(a)-Date.parse(b))/864e5);
+const ft=s=>new Date(s).toLocaleString('en-GB',{hour12:false}).slice(0,17);
+const TT={chicks_gr:'استلام الصيصان',confirmation:'تأكيد الإنتاجية',inspection:'تسجيل الفحوصات',feed_gr:'استلام أعلاف',med_gr:'استلام أدوية',feed_tr:'تحويل أعلاف',med_tr:'تحويل أدوية'};
+const TO=Object.keys(TT),lb=t=>t.type=='custom'?esc(t.title):TT[t.type];
+const STS=[['open','مفتوح'],['start','بدأ العمل'],['prog','قيد التنفيذ'],['rev','مراجعة نهائية'],['done','مغلق نهائيًا']];
+const TABS=[['dash','اللوحة'],['new','إنشاء دورة جديدة'],['tasks','المهام اليومية'],['ord','أوامر الإنتاج']];
+let P={},FARMS=[],FM={},HOUSES=[],ORD=[],OM={},TK=[],LATE=[],D=today,tab='dash',booted=0;
+let F={c:'',f:'',o:'',late:0},N={c:1,f:'',s:today,n:29,h:{},q:{},no:{},x:''},M=null;
+async function all(mk){let r=[],i=0;for(;;){const{data,error}=await mk().range(i,i+999);if(error)throw error;r=r.concat(data);if(data.length<1000)return r;i+=1000}}
+const TS='id,scope,farm_id,order_id,task_date,type,title,status,note,done_at,edited_at';
+async function loadTasks(){
+ TK=await all(()=>sb.from('tasks').select(TS).eq('task_date',D).order('id'));
+ LATE=await all(()=>sb.from('tasks').select(TS).eq('status','pending').lt('task_date',D).order('task_date').order('id'))}
+async function loadAll(){
+ FARMS=await all(()=>sb.from('farms').select('id,name').order('name'));FM={};FARMS.forEach(f=>FM[f.id]=f.name);
+ HOUSES=await all(()=>sb.from('houses').select('id,farm_id,no').order('id'));
+ const o=await all(()=>sb.from('production_orders').select('id,order_no,start_date,end_date,housed_qty,status,farm_id,house_id,cycles(no),houses(no)').order('id'));
+ ORD=o.map(x=>({id:x.id,no:x.order_no,s:x.start_date,e:x.end_date,q:x.housed_qty||0,st:x.status,farm:x.farm_id,house:x.houses.no,hid:x.house_id,c:x.cycles.no}));
+ OM={};ORD.forEach(x=>OM[x.id]=x);
+ if(!booted){const mx=ORD.reduce((m,x)=>x.e>m?x.e:m,'');if(mx&&mx<today)D=mx;if(ORD.length)N.c=Math.max(...ORD.map(x=>x.c));booted=1}
+ await loadTasks()}
+async function boot(){
+ const{data:{session}}=await sb.auth.getSession();
+ $('lg').style.display=session?'none':'';$('app').style.display=session?'':'none';
+ if(!session)return;
+ try{P=(await sb.from('profiles').select('*').eq('id',session.user.id).single()).data||{};await loadAll()}
+ catch(e){alert('تعذر تحميل البيانات: '+e.message)}
+ $('who').textContent=P.full_name||'';render()}
+const fp=o=>(!F.c||o.c==F.c)&&(!F.f||o.farm==F.f)&&(!F.o||o.id==F.o);
+const uniq=a=>[...new Set(a)].sort();
+const sel=(at,list,v,all)=>`<select data-${at}>`+(all!==null?`<option value="">${all}</option>`:'')+list.map(x=>{const[val,l]=Array.isArray(x)?x:[x,x];return `<option value="${val}" ${val==v?'selected':''}>${l}</option>`}).join('')+'</select>';
+const tb=(t,c)=>`<button class="${c} ${t.status=='pending'?'':t.status}" data-tk="${t.id}">${lb(t)}${t.note?' 📝':''}</button>`;
+function vDash(){
+ const act=ORD.filter(o=>o.s<=D&&D<=o.e),R={},g=f=>R[f]=R[f]||{h:0,t:0,d:0,l:0};
+ act.forEach(o=>g(o.farm).h++);TK.forEach(t=>{const r=g(t.farm_id);r.t++;if(t.status!='pending')r.d++});LATE.forEach(t=>g(t.farm_id).l++);
+ let tot=0,dn_=0;Object.values(R).forEach(r=>{tot+=r.t;dn_+=r.d});
+ const tr=Object.keys(R).sort((a,b)=>FM[a]>FM[b]?1:-1).map(f=>{const r=R[f];return `<tr class="k" data-go="${f}"><td>${esc(FM[f])}</td><td>${r.h}</td><td>${r.d}/${r.t}</td><td><div class="bar"><i style="width:${r.t?r.d/r.t*100:0}%"></i></div></td><td>${r.l?`<span class="st">${r.l}</span>`:'—'}</td></tr>`}).join('');
+ return `<div class="sum"><div>مهام اليوم<b>${tot}</b></div><div>تم إنجازه<b>${dn_}</b></div><div class="w">متأخر<b>${LATE.length}</b></div><div>بيوت نشطة<b>${act.length}</b></div></div><div class="tw"><table><tr><th>المزرعة</th><th>بيوت نشطة</th><th>إنجاز اليوم</th><th></th><th>متأخر</th></tr>${tr||'<tr><td colspan=5 class="empty">لا نشاط في هذا التاريخ</td></tr>'}</table></div>`}
+function vTasks(){
+ const cs=uniq(ORD.map(o=>o.c)),os=ORD.filter(o=>(!F.c||o.c==F.c)&&(!F.f||o.farm==F.f)).sort((a,b)=>FM[a.farm]+a.house>FM[b.farm]+b.house?1:-1);
+ const fs=uniq(ORD.filter(o=>!F.c||o.c==F.c).map(o=>o.farm)).map(i=>[i,FM[i]]);
+ const flt=`<div class="fl"><label>الدورة</label>${sel('fl="c"',cs,F.c,'الكل')}<label>المزرعة</label>${sel('fl="f"',fs,F.f,'الكل')}<label>البيت / الأمر</label>${sel('fl="o"',os.map(o=>[o.id,FM[o.farm]+' · '+o.house+' · '+o.no]),F.o,'الكل')}<label><input type="checkbox" data-late ${F.late?'checked':''}> المتأخر فقط</label></div>`;
+ const ids=new Set(ORD.filter(fp).map(o=>o.id)),ok=t=>t.scope=='farm'?(!F.o&&(!F.f||t.farm_id==F.f)):ids.has(t.order_id);
+ if(F.late){const L=LATE.filter(ok);if(!L.length)return flt+'<div class="empty">لا توجد مهام متأخرة بهذه المرشحات.</div>';
+  const by={};L.forEach(t=>(by[t.farm_id]=by[t.farm_id]||[]).push(t));
+  return flt+Object.keys(by).sort((a,b)=>by[b].length-by[a].length).map(f=>{const ds={};by[f].forEach(t=>(ds[t.task_date]=ds[t.task_date]||[]).push(t));
+   return `<details><summary>${esc(FM[f])}<span>${by[f].length} متأخرة</span></summary>`+Object.keys(ds).sort().reverse().map(d=>`<div class="h"><span class="n" style="width:90px">${d}</span>`+ds[d].map(t=>{const o=OM[t.order_id];return `<button class="t o" data-tk="${t.id}">${lb(t)}${o?' · '+o.house+' · '+o.no:''}</button>`}).join('')+'</div>').join('')+'</details>'}).join('')}
+ const by={};TK.filter(ok).forEach(t=>{const g=by[t.farm_id]=by[t.farm_id]||{f:[],o:{}};if(t.scope=='farm')g.f.push(t);else(g.o[t.order_id]=g.o[t.order_id]||[]).push(t)});
+ const cards=Object.keys(by).sort((a,b)=>FM[a]>FM[b]?1:-1).map(f=>{const g=by[f];
+  const ch=g.f.map(t=>tb(t,'chip')).join('')+(F.o?'':`<button class="chip" data-add="${f}">+ مهمة</button>`);
+  const rows=Object.keys(g.o).map(i=>OM[i]).filter(Boolean).sort((a,b)=>a.house>b.house?1:-1).map(o=>`<div class="h"><span class="n">${o.house}<small>${o.no}</small></span><span class="a">العمر ${dn(D,o.s)} · ${o.q.toLocaleString('en')}</span>${g.o[o.id].sort((a,b)=>TO.indexOf(a.type)-TO.indexOf(b.type)).map(t=>tb(t,'t')).join('')}</div>`).join('');
+  return `<div class="card"><h3>${esc(FM[f])}<small>${Object.keys(g.o).length} بيت</small></h3><div class="chips">${ch}</div>${rows}</div>`}).join('');
+ return flt+(cards?`<div class="grid">${cards}</div>`:'<div class="empty">لا توجد مهام بهذه المرشحات في هذا التاريخ.</div>')}
+function vOrd(){
+ const pend={};LATE.forEach(t=>{if(t.order_id)pend[t.order_id]=(pend[t.order_id]||0)+1});
+ const flt=`<div class="fl"><label>الدورة</label>${sel('fl="c"',uniq(ORD.map(o=>o.c)),F.c,'الكل')}<label>المزرعة</label>${sel('fl="f"',uniq(ORD.filter(o=>!F.c||o.c==F.c).map(o=>o.farm)).map(i=>[i,FM[i]]),F.f,'الكل')}</div>`;
+ const rows=ORD.filter(o=>(!F.c||o.c==F.c)&&(!F.f||o.farm==F.f)).sort((a,b)=>FM[a.farm]+a.house>FM[b.farm]+b.house?1:-1).map(o=>`<tr><td>${esc(o.no)}</td><td>${o.c}</td><td>${esc(FM[o.farm])}</td><td>${o.house}</td><td>${o.s}</td><td>${o.e}</td><td>${sel('os="'+o.id+'"',STS,o.st,null)}</td><td>${pend[o.id]?pend[o.id]+' متأخرة':'—'}</td></tr>`).join('');
+ return flt+`<div class="tw"><table><tr><th>أمر الإنتاج</th><th>الدورة</th><th>المزرعة</th><th>البيت</th><th>تاريخ الفتح</th><th>تاريخ النهاية</th><th>الحالة</th><th>المهام</th></tr>${rows}</table></div>`}
+function vNew(){
+ if(P.role!='admin')return '<div class="empty">إنشاء الدورات متاح للمدير فقط.</div>';
+ const hs={};HOUSES.filter(h=>h.farm_id==N.f).forEach(h=>hs[h.no]=0);ORD.forEach(o=>{if(o.farm==N.f)hs[o.house]=o.q});
+ N.x.split(/[,،\s]+/).filter(Boolean).forEach(h=>{h=h.padStart(4,'0');if(!(h in hs))hs[h]=0});
+ const hl=N.f?Object.keys(hs).sort().map(h=>`<div><input type="checkbox" data-nh="${h}" ${N.h[h]?'checked':''}> <b>${h}</b><input type="number" data-nq="${h}" value="${N.q[h]??hs[h]}" placeholder="العدد"><input data-no="${h}" value="${esc(N.no[h]||'')}" placeholder="رقم أمر الإنتاج"></div>`).join(''):'';
+ return `<div class="fm"><b>إنشاء دورة وفتح أوامر الإنتاج</b>
+ <label>رقم الدورة (اتركه كما هو للإضافة على الدورة الحالية)</label><input type="number" data-nf="c" value="${N.c}">
+ <label>المزرعة</label>${sel('nf="f"',FARMS.map(f=>[f.id,f.name]),N.f,'اختر مزرعة')}
+ <label>تاريخ البداية (العمر 0)</label><input type="date" data-nf="s" value="${N.s}">
+ <label>مدة الدورة بالأيام</label><input type="number" data-nf="n" value="${N.n}" min="1" max="60">
+ ${N.f?`<label>البيوت وعدد الصيصان ورقم الأمر (الفارغ يُرقَّم تلقائيًا)</label><div class="hs">${hl}</div><label>بيوت إضافية (أرقام مفصولة بفواصل)</label><input data-nf="x" value="${esc(N.x)}" placeholder="0207, 0208">`:''}
+ <div style="margin-top:14px"><button class="btn" id="mk">إنشاء وتوليد الأيام والمهام</button></div></div>`}
+function render(){
+ const tabs=TABS.filter(t=>t[0]!='new'||P.role=='admin');
+ $('nv').innerHTML=tabs.map(([k,l])=>`<button class="${tab==k?'on':''}" data-t="${k}">${l}</button>`).join('');
+ $('ti').textContent=TABS.find(t=>t[0]==tab)[1];$('dt').value=D;
+ $('m').innerHTML=({dash:vDash,new:vNew,tasks:vTasks,ord:vOrd})[tab]()}
+function openTask(id){const t=[...TK,...LATE].find(x=>x.id==id);if(!t)return;M=t;const o=OM[t.order_id];
+ $('tl').textContent=lb(t).replace(/&amp;/g,'&')+' · '+FM[t.farm_id]+(o?' · بيت '+o.house+' · أمر '+o.no:'')+' · '+t.task_date;
+ $('ts').value=t.status=='na'?'na':'done';$('tn').value=t.note||'';
+ $('tm').innerHTML=t.status!='pending'?'تم الحفظ: '+ft(t.done_at)+(t.edited_at?'<br>آخر تعديل: '+ft(t.edited_at):''):'لم تُسجَّل بعد';
+ $('tdl').style.display=t.status!='pending'?'':'none';$('tdx').style.display=t.type=='custom'?'':'none';$('tk').showModal()}
+async function run(p){try{const r=await p;if(r&&r.error)throw r.error;return r}catch(e){alert('تعذر التنفيذ: '+e.message);throw e}}
+$('tsv').onclick=async()=>{await run(sb.from('tasks').update({status:$('ts').value,note:$('tn').value.trim()||null}).eq('id',M.id));$('tk').close();await loadTasks();render()};
+$('tdl').onclick=async()=>{if(!confirm('حذف تسجيل هذه المهمة؟'))return;await run(sb.from('tasks').update({status:'pending'}).eq('id',M.id));$('tk').close();await loadTasks();render()};
+$('tdx').onclick=async()=>{if(!confirm('حذف هذه المهمة نهائيًا؟'))return;await run(sb.from('tasks').delete().eq('id',M.id));$('tk').close();await loadTasks();render()};
+$('tcx').onclick=()=>$('tk').close();
+async function create(){
+ const hs=Object.keys(N.h).filter(h=>N.h[h]);
+ if(!N.f||!hs.length||!N.s||!N.c){alert('اختر المزرعة وبيتًا واحدًا على الأقل وحدد التاريخ.');return}
+ try{
+  const cy=await run(sb.from('cycles').upsert({no:+N.c},{onConflict:'no'}).select().single());
+  const hm={};HOUSES.filter(h=>h.farm_id==N.f).forEach(h=>hm[h.no]=h.id);
+  const miss=hs.filter(h=>!hm[h]);
+  if(miss.length){const r=await run(sb.from('houses').insert(miss.map(no=>({farm_id:N.f,no}))).select());r.data.forEach(h=>{hm[h.no]=h.id;HOUSES.push(h)})}
+  let nx=Math.max(0,...ORD.map(o=>+o.no||0))+1;const e=iso(new Date(Date.parse(N.s)+(+N.n||29)*864e5));
+  await run(sb.from('production_orders').insert(hs.map(h=>({order_no:N.no[h]||String(nx++),cycle_id:cy.data.id,farm_id:N.f,house_id:hm[h],start_date:N.s,end_date:e,housed_qty:+(N.q[h]||0)}))));
+  N={c:N.c,f:'',s:N.s,n:29,h:{},q:{},no:{},x:''};F={c:'',f:'',o:'',late:0};tab='ord';await loadAll();render()
+ }catch(e){}}
+document.addEventListener('click',async e=>{
+ const tr=e.target.closest('tr[data-go]');if(tr){F={c:'',f:tr.dataset.go,o:'',late:0};tab='tasks';render();return}
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.t){tab=b.dataset.t;render()}
+ else if(b.dataset.tk)openTask(b.dataset.tk);
+ else if(b.dataset.add){const t=prompt('اسم المهمة الإضافية');if(t){await run(sb.from('tasks').insert({scope:'farm',farm_id:b.dataset.add,task_date:D,type:'custom',title:t}));await loadTasks();render()}}
+ else if(b.id=='mk')create()});
+document.addEventListener('change',async e=>{const t=e.target,d=t.dataset;
+ if(d.fl){F[d.fl]=t.value;if(d.fl=='c'){F.f='';F.o=''}if(d.fl=='f')F.o='';render()}
+ else if(d.late!==undefined){F.late=t.checked?1:0;render()}
+ else if(d.nf){N[d.nf]=t.value;if(d.nf=='f'){N.h={};N.q={};N.no={};N.x=''}if(d.nf=='f')render();if(d.nf=='x'){N.x.split(/[,،\s]+/).filter(Boolean).forEach(h=>N.h[h.padStart(4,'0')]=true);render()}}
+ else if(d.os){await run(sb.from('production_orders').update({status:t.value}).eq('id',d.os));OM[d.os].st=t.value}
+ else if(d.nh!==undefined)N.h[d.nh]=t.checked;
+ else if(d.nq!==undefined)N.q[d.nq]=t.value;
+ else if(d.no!==undefined)N.no[d.no]=t.value.trim()});
+$('dt').onchange=async e=>{if(e.target.value){D=e.target.value;await loadTasks();render()}};
+$('td').onclick=async()=>{D=today;await loadTasks();render()};
+$('go').onclick=async()=>{$('er').textContent='';const{error}=await sb.auth.signInWithPassword({email:$('em').value.trim(),password:$('pw').value});if(error)$('er').textContent='بيانات الدخول غير صحيحة'};
+$('out').onclick=async e=>{e.preventDefault();await sb.auth.signOut()};
+let cu=null;
+sb.auth.onAuthStateChange((ev,s)=>{const u=s&&s.user?s.user.id:null;if(ev=='TOKEN_REFRESHED'||(u===cu&&ev!='INITIAL_SESSION'))return;cu=u;booted=0;setTimeout(boot,0)});
+</script></body></html>
